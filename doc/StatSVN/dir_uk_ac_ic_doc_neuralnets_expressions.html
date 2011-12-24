@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>StatSVN - Directory uk/ac/ic/doc/neuralnets/expressions/</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatSVN 0.4.1"/>
+    <link rel="stylesheet" href="statcvs.css" type="text/css"/>
+  </head>
+
+<body>
+
+<h1>Directory uk/ac/ic/doc/neuralnets/expressions/</h1>
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for  /neuralnets/trunk/src</a></div>
+<dl class="attributes">
+    <dt>Directory Created:</dt>
+    <dd><span class="date">2008-11-20 19:16</span></dd>
+    <dt>Total Files:</dt>
+    <dd>5</dd>
+    <dt>Deleted Files:</dt>
+    <dd>0</dd>
+    <dt>Lines of Code:</dt>
+    <dd>1835</dd>
+</dl>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_uk.html">uk</a>/<a href="dir_uk_ac.html">ac</a>/<a href="dir_uk_ac_ic.html">ic</a>/<a href="dir_uk_ac_ic_doc.html">doc</a>/<a href="dir_uk_ac_ic_doc_neuralnets.html">neuralnets</a>/<strong>expressions</strong><br/>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<img src="folder.png" width="15" height="13" alt="directory in repo" title="directory in repo"/> 
+<a href="dir_uk_ac_ic_doc_neuralnets_expressions_ast.html">ast</a> 
+(11 files, 2401 lines)<br />
+</p>
+
+<div class="section">
+<h2>Lines of Code</h2>
+<p class="chart"><img src="loc_module_uk_ac_ic_doc_neuralnets_expressions.png" alt="uk/ac/ic/doc/neuralnets/expressions/ Lines of Code" width="720" height="450" /></p></div>
+<div class="section">
+<h2>Developers</h2>
+  <table  rules="groups" summary="All authors and the number of their changes and lines of code in this directory">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_plc06.html" class="author">plc06</a></th>
+        <td>30 (100.0%)</td>
+        <td>2738 (100.0%)</td>
+        <td>91.2</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="section">
+<h2>Most Recent Commits</h2>
+<dl class="commitlist">
+  <dt><a name="13"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-12 15:14</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">503</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Changed "Major_Error" to "Peter Coetzee", and "Fred" for "Fred van den Driessche" in javadoc etc.
+    </p>
+    <p class="commitdetails"><strong>122</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        BindVariable.java&#160;<span class="change">(+1&#160;-1)</span>,
+        CalculationLexer.java&#160;<span class="change">(+78&#160;-78)</span>,
+        CalculationParser.java&#160;<span class="change">(+41&#160;-41)</span>,
+        Expression.java&#160;<span class="change">(+1&#160;-1)</span>,
+        ExpressionException.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-12-29 13:02</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">291</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Moved NodeSpecificationPanel to NeuroneDesigner, and added a modal accessor button for it to the toolbar. This will let the user design neurone types, and bubbles them up through the GUI to the add nodes panel, as well as persisting the configuration immediately. Supports modification of existing types as well as creation of new types.
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        ExpressionException.java&#160;<span class="change">(+1&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-24 16:08</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">187</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Implemented Expression parsing --&gt; AST rather than plain-old-value form. Has potential to be optimised better (coming soon!) and removes need to re-parse expressions.
+    </p>
+    <p class="commitdetails"><strong>44</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        BindVariable.java&#160;<span class="change">(+3)</span>,
+        CalculationLexer.java&#160;<span class="change">(+1&#160;-1)</span>,
+        CalculationParser.java&#160;<span class="change">(+34&#160;-34)</span>,
+        ExpressionException.java&#160;<span class="change">(+6)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-24 13:53</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">180</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added 'rebind' (optional, default false) parameter to BindVariable, to instruct the Expression whether or not this variable is dynamic and should be re-bound every time the expression is evaluated. If it is not present, and set to true, the binding will be evaluated immediately upon bind() method invocation.
+    </p>
+    <p class="commitdetails"><strong>31</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        BindVariable.java&#160;<span class="change">(+9)</span>,
+        Expression.java&#160;<span class="change">(+22&#160;-16)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-24 13:42</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">179</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Performance enhancements to the Expression variable implementation
+    </p>
+    <p class="commitdetails"><strong>26</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        Expression.java&#160;<span class="change">(+26&#160;-13)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-24 12:45</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">177</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added variable support to Expressions. BindVariable annotation is used to denote a method that should be used to get a Double value to bind variables to. The value() it takes is the name of the variable to bind.
+    </p>
+    <p class="commitdetails"><strong>480</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        BindVariable.java&#160;<span class="new">(new&#160;15)</span>,
+        CalculationLexer.java&#160;<span class="change">(+213&#160;-130)</span>,
+        CalculationParser.java&#160;<span class="change">(+184&#160;-154)</span>,
+        Expression.java&#160;<span class="change">(+68&#160;-16)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-23 14:53</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">164</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Factored out Expression parsing exceptions into custom class, to prevent ANTLR dependency leakage. Also improved error handling (parser stores all errors, then actually throws one if something goes wrong!)
+    </p>
+    <p class="commitdetails"><strong>261</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        CalculationLexer.java&#160;<span class="change">(+73&#160;-73)</span>,
+        CalculationParser.java&#160;<span class="change">(+164&#160;-143)</span>,
+        Expression.java&#160;<span class="change">(+10&#160;-8)</span>,
+        ExpressionException.java&#160;<span class="new">(new&#160;14)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-22 18:40</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">160</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed SpikingNeurone behaviour (again!). Added some useful methods to Expression also.
+    </p>
+    <p class="commitdetails"><strong>4</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        Expression.java&#160;<span class="change">(+4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-22 18:08</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">159</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+NodeSpecification and Factory are mostly rewritten to use new GUI-Friendly setters and getters. GUI will read behaviour from conf/nodetypes.cfg and act accordingly
+    </p>
+    <p class="commitdetails"><strong>11</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        Expression.java&#160;<span class="change">(+11)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-22 16:34</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">155</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Early start on generic node specification framework, and interfaces for training. All very subject to change at the moment.
+    </p>
+    <p class="commitdetails"><strong>13</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        Expression.java&#160;<span class="change">(+13&#160;-5)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-21 15:27</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">148</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added trig and hyperbolic functions to expression parser. Also fixed highlighting for ElasticBandSelection plugin.
+    </p>
+    <p class="commitdetails"><strong>524</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        CalculationLexer.java&#160;<span class="change">(+271&#160;-80)</span>,
+        CalculationParser.java&#160;<span class="change">(+253&#160;-101)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-20 19:21</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">138</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Made Expression more robust - doesn't require \n at the end of expressions as a delimiter any more.
+    </p>
+    <p class="commitdetails"><strong>8</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        Expression.java&#160;<span class="change">(+8&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-20 19:16</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">137</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Implemented an expressions parser using antlr, for neurone parameter description.
+    </p>
+    <p class="commitdetails"><strong>1213</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/expressions</strong>:
+        CalculationLexer.java&#160;<span class="new">(new&#160;642)</span>,
+        CalculationParser.java&#160;<span class="new">(new&#160;538)</span>,
+        Expression.java&#160;<span class="new">(new&#160;33)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+</div><div id="generatedby">Generated by <a href="http://www.statsvn.org">StatSVN</a> 0.4.1</div>
+</body>
+</html>

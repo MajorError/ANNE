@@ -1,0 +1,173 @@
+\documentclass{acm_proc_article-sp} 
+\usepackage{times,textcomp} 
+\usepackage{graphics} 
+\usepackage{amsmath,amssymb,amsfonts,textcomp} 
+\def\execsummary{ \ifnum 
+\titlenotecount>0 
+
+% was =1
+\insert\footins{
+
+%
+\reset@font\footnotesize \interlinepenalty\interfootnotelinepenalty \splittopskip\footnotesep \splitmaxdepth \dp\strutbox \floatingpenalty \@MM \hsize\columnwidth \@parboxrestore \protected@edef\@currentlabel{
+
+%
+}
+
+%
+\color@begingroup \ifnum 
+\titlenotecount=1 \@maketntext{
+
+%
+\raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\@finalstrut\strutbox}
+
+%
+\fi \ifnum 
+\titlenotecount=2 \@maketntext{
+
+%
+\raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\@finalstrut\strutbox}
+
+%
+\fi \ifnum 
+\titlenotecount=3 \@maketntext{
+
+%
+\raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\@finalstrut\strutbox}
+
+%
+\fi \ifnum 
+\titlenotecount=4 \@maketntext{
+
+%
+\raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\@finalstrut\strutbox}
+
+%
+\fi \ifnum 
+\titlenotecount=5 \@maketntext{
+
+%
+\raisebox{4pt}{$\ast$}\rule\z@\footnotesep\ignorespaces\the\tntoks\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\dagger$}\rule\z@\footnotesep\ignorespaces\the\tntokstwo\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\ddagger$}\rule\z@\footnotesep\ignorespaces\the\tntoksthree\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\S$}\rule\z@\footnotesep\ignorespaces\the\tntoksfour\par\@finalstrut\strutbox}
+
+%
+\@maketntext{
+
+%
+\raisebox{4pt}{$\P$}\rule\z@\footnotesep\ignorespaces\the\tntoksfive\@finalstrut\strutbox}
+
+%
+\fi \color@endgroup} 
+
+%g}
+\fi \setcounter{footnote}{0} 
+\section*{EXECUTIVE SUMMARY}\normalsize 
+
+%\the\parskip \the\baselineskip%\ninept
+}
+
+\def 
+\endexecsummary{\if@twocolumn\else 
+\endquotation\fi} 
+\newcommand\textsubscript[1]{\ensuremath{{}_{\text{#1}}}}
+
+\begin{document}
+
+\title{ANNE: Artificial Neural Network Editor} \subtitle{A Neural Network Modelling Tool}
+
+\numberofauthors{5} 
+\author{
+% 1st. author
+\alignauthor Peter Coetzee \linebreak \affaddr{Department of Computing, Imperial College London}\\
+\email{plc06@doc.ic.ac.uk} \alignauthor Fred van den Driessche \linebreak \affaddr{Department of Computing, Imperial College London}\\
+\email{jv06@doc.ic.ac.uk} \alignauthor Ismail Gunsaya \linebreak \affaddr{Department of Computing, Imperial College London}\\
+\email{ig106@doc.ic.ac.uk} \and \alignauthor Chris Matthews \linebreak \affaddr{Department of Computing, Imperial College London}\\
+\email{ctm06@doc.ic.ac.uk} \alignauthor Stephen Wray \linebreak \affaddr{Department of Computing, Imperial College London}\\
+\email{sjw06@doc.ic.ac.uk}
+}
+
+\toappear{
+This is the executive summary of the report which was published at the same time under the same name. For further reading, please refer to the full report. 
+\newline 
+\newline This work was conducted under the guidance of Murray Shanahan, as part of an Imperial College London, Department of Computing software engineering project. It was presented as part of the proceedings of the 3rd year group project seminar. 
+\newline 
+\newline Department of Computing, Imperial College London, 
+\newline 180 Queen's Gate, London, SW7 2AZ, United Kingdom
+}
+
+\maketitle 
+\begin{execsummary}
+{
+The Artificial Neural Network Editor (ANNE) is a highly extensible application that has been primarily designed to build and model large neural networks. ANNE gives the user the ability to create large scale networks quickly and efficiently as well make specific changes at an individual neurone level. Once built, networks can be trained by a number of algorithms and and executed on input data. ANNE has the ability to save and load networks from a number of file formats and from other applications, allowing the user a high degree of freedom with networks produced in the tool. ANNE has been designed to be extended trivially by developers to focus its power to specific applications.
+
+ANNE is split into three distinct components: a framework, the neural network APIs and graphical user interface built on top of the Eclipse Zest platform, and a set of ANNE specific plugins. The framework provides the basic programming constructs that underpin the application, this is not specific to neural networks. The plugins allow extensions to the behaviour of the environment and allow further complex interactions with neural networks.
+
+The standard distribution provides all that is needed for a user to model complex neural networks and a small set of building patterns are provided, including as a number of neurone models ranging from perceptrons to excitatory spiking neurones. Connectivity is provided either by synapses which can either be manipulated manually, or by several connection algorithms. Networks can contain sub-networks, enabling a users to encapsulate or abstract parts of their networks from view to reduce complexity. These sub-networks can be inserted into other networks from files.
+\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+As ANNE is built on the Eclipse GUI platform users will find the interface intuitive, especially if they are familiar with the Eclipse IDE. A full range of interface features are available, increasing productivity when using the application. Examples of these are undo/redo, save/load to various file formats, insert as well as all the actions for adding parts to the network.
+
+Because of ANNE's extensible design adding new feature sets to speed up network development, add other training or connectivity algorithms and new neurone or synapses designs is trivial for Java programmers. Extensions to the persistence module would allow ANNE to read other file formats and take data from other sources. This means that in choosing ANNE as your neural network development platform, you can be assured that a new piece of ground breaking research can be added quickly, enabling development teams to make the most of their time.
+
+ANNE provides a stable and effective neural network development platform that will be highly scalable and future proof, providing a dependable infrastructure for your operation.
+
+} 
+\end{execsummary}
+\end{document} 

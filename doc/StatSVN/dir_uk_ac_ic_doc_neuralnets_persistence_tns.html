@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>StatSVN - Directory uk/ac/ic/doc/neuralnets/persistence/tns/</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatSVN 0.4.1"/>
+    <link rel="stylesheet" href="statcvs.css" type="text/css"/>
+  </head>
+
+<body>
+
+<h1>Directory uk/ac/ic/doc/neuralnets/persistence/tns/</h1>
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for  /neuralnets/trunk/src</a></div>
+<dl class="attributes">
+    <dt>Directory Created:</dt>
+    <dd><span class="date">2009-01-07 11:34</span></dd>
+    <dt>Total Files:</dt>
+    <dd>12</dd>
+    <dt>Deleted Files:</dt>
+    <dd>0</dd>
+    <dt>Lines of Code:</dt>
+    <dd>924</dd>
+</dl>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_uk.html">uk</a>/<a href="dir_uk_ac.html">ac</a>/<a href="dir_uk_ac_ic.html">ic</a>/<a href="dir_uk_ac_ic_doc.html">doc</a>/<a href="dir_uk_ac_ic_doc_neuralnets.html">neuralnets</a>/<a href="dir_uk_ac_ic_doc_neuralnets_persistence.html">persistence</a>/<strong>tns</strong><br/>
+</p>
+
+<div class="section">
+<h2>Lines of Code</h2>
+<p class="chart"><img src="loc_module_uk_ac_ic_doc_neuralnets_persistence_tns.png" alt="uk/ac/ic/doc/neuralnets/persistence/tns/ Lines of Code" width="720" height="450" /></p></div>
+<div class="section">
+<h2>Developers</h2>
+  <table  rules="groups" summary="All authors and the number of their changes and lines of code in this directory">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_plc06.html" class="author">plc06</a></th>
+        <td>51 (100.0%)</td>
+        <td>1494 (100.0%)</td>
+        <td>29.2</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="section">
+<h2>Most Recent Commits</h2>
+<dl class="commitlist">
+  <dt><a name="8"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-12 15:14</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">503</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Changed "Major_Error" to "Peter Coetzee", and "Fred" for "Fred van den Driessche" in javadoc etc.
+    </p>
+    <p class="commitdetails"><strong>12</strong> lines of code changed in <span class="files">12 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeIOHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        EdgeParentInsertionIOHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        FastLoadTextSerialisationService.java&#160;<span class="change">(+1&#160;-1)</span>,
+        FastSaveTextSerialisationService.java&#160;<span class="change">(+1&#160;-1)</span>,
+        LoadTextSerialisationService.java&#160;<span class="change">(+1&#160;-1)</span>,
+        NetworkBridgeIOHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        NodeIOHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        NotYetAvailableException.java&#160;<span class="change">(+1&#160;-1)</span>,
+        ObjectIOEventHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        ObjectInputEvent.java&#160;<span class="change">(+1&#160;-1)</span>,
+        ObjectOutputEvent.java&#160;<span class="change">(+1&#160;-1)</span>,
+        SaveTextSerialisationService.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-10 23:15</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">460</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Wrote single-threaded Fast versions of the load and save TNS services. Much better than EventHandler driven ones.
+    </p>
+    <p class="commitdetails"><strong>225</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        FastLoadTextSerialisationService.java&#160;<span class="new">(new&#160;101)</span>,
+        FastSaveTextSerialisationService.java&#160;<span class="new">(new&#160;95)</span>,
+        ObjectIOEventHandler.java&#160;<span class="change">(+29&#160;-15)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-10 17:26</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">455</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed duplicate line output bug in TNS.
+    </p>
+    <p class="commitdetails"><strong>39</strong> lines of code changed in <span class="files">7 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeIOHandler.java&#160;<span class="change">(+1&#160;-1)</span>,
+        EdgeParentInsertionIOHandler.java&#160;<span class="change">(+5&#160;-3)</span>,
+        LoadTextSerialisationService.java&#160;<span class="change">(+1)</span>,
+        NetworkBridgeIOHandler.java&#160;<span class="change">(+2&#160;-2)</span>,
+        NodeIOHandler.java&#160;<span class="change">(+2&#160;-2)</span>,
+        ObjectIOEventHandler.java&#160;<span class="change">(+27&#160;-12)</span>,
+        SaveTextSerialisationService.java&#160;<span class="change">(+1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-10 13:01</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">447</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added stuff to commit that was missing previously from refactors....
+    </p>
+    <p class="commitdetails"><strong>695</strong> lines of code changed in <span class="files">10 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeIOHandler.java&#160;<span class="new">(new&#160;66)</span>,
+        EdgeParentInsertionIOHandler.java&#160;<span class="new">(new&#160;62)</span>,
+        LoadTextSerialisationService.java&#160;<span class="new">(new&#160;94)</span>,
+        NetworkBridgeIOHandler.java&#160;<span class="new">(new&#160;38)</span>,
+        NodeIOHandler.java&#160;<span class="new">(new&#160;66)</span>,
+        NotYetAvailableException.java&#160;<span class="new">(new&#160;9)</span>,
+        ObjectIOEventHandler.java&#160;<span class="new">(new&#160;217)</span>,
+        ObjectInputEvent.java&#160;<span class="new">(new&#160;27)</span>,
+        ObjectOutputEvent.java&#160;<span class="new">(new&#160;27)</span>,
+        SaveTextSerialisationService.java&#160;<span class="new">(new&#160;89)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-10 00:39</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">438</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Deleted old and factored-out directories from the repo.
+    </p>
+    <p class="commitdetails"><strong>0</strong> lines of code changed in <span class="files">8 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeIOHandler.java&#160;<span class="del">(del)</span>,
+        EdgeParentInsertionIOHandler.java&#160;<span class="del">(del)</span>,
+        NetworkBridgeIOHandler.java&#160;<span class="del">(del)</span>,
+        NodeIOHandler.java&#160;<span class="del">(del)</span>,
+        NotYetAvailableException.java&#160;<span class="del">(del)</span>,
+        ObjectIOEventHandler.java&#160;<span class="del">(del)</span>,
+        ObjectInputEvent.java&#160;<span class="del">(del)</span>,
+        ObjectOutputEvent.java&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-09 18:13</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">428</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Removed spurious logging, fixed missing methods in tests.
+    </p>
+    <p class="commitdetails"><strong>3</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        ObjectIOEventHandler.java&#160;<span class="change">(+3&#160;-2)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-07 13:15</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">366</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Improved EventManager performance by tightening up its uses of synchronization. Also, removed some unnecessary logging from various locations.
+    </p>
+    <p class="commitdetails"><strong>10</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeParentInsertionIOHandler.java&#160;<span class="change">(-1)</span>,
+        ObjectIOEventHandler.java&#160;<span class="change">(+10&#160;-8)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2009-01-07 11:34</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">360</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Initial complete TNS serialiser implementation. Saving and loading seems mostly operational, some work could perhaps be done on terseness of save.
+    </p>
+    <p class="commitdetails"><strong>510</strong> lines of code changed in <span class="files">8 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/persistence/tns</strong>:
+        EdgeIOHandler.java&#160;<span class="new">(new&#160;66)</span>,
+        EdgeParentInsertionIOHandler.java&#160;<span class="new">(new&#160;63)</span>,
+        NetworkBridgeIOHandler.java&#160;<span class="new">(new&#160;38)</span>,
+        NodeIOHandler.java&#160;<span class="new">(new&#160;66)</span>,
+        NotYetAvailableException.java&#160;<span class="new">(new&#160;9)</span>,
+        ObjectIOEventHandler.java&#160;<span class="new">(new&#160;214)</span>,
+        ObjectInputEvent.java&#160;<span class="new">(new&#160;27)</span>,
+        ObjectOutputEvent.java&#160;<span class="new">(new&#160;27)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+</div><div id="generatedby">Generated by <a href="http://www.statsvn.org">StatSVN</a> 0.4.1</div>
+</body>
+</html>

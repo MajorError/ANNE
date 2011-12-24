@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>StatSVN - Directory uk/ac/ic/doc/neuralnets/statistics/</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatSVN 0.4.1"/>
+    <link rel="stylesheet" href="statcvs.css" type="text/css"/>
+  </head>
+
+<body>
+
+<h1>Directory uk/ac/ic/doc/neuralnets/statistics/</h1>
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for  /neuralnets/trunk/src</a></div>
+<dl class="attributes">
+    <dt>Directory Created:</dt>
+    <dd><span class="date">2008-11-03 09:09</span></dd>
+    <dt>Directory Deleted:</dt>
+    <dd><span class="date">2008-12-29 10:42</span></dd>
+    <dt>Total Files:</dt>
+    <dd>0</dd>
+    <dt>Deleted Files:</dt>
+    <dd>16</dd>
+    <dt>Lines of Code:</dt>
+    <dd>0</dd>
+</dl>
+<p class="dirtree">
+<a href="dir.html">[root]</a>/<a href="dir_uk.html">uk</a>/<a href="dir_uk_ac.html">ac</a>/<a href="dir_uk_ac_ic.html">ic</a>/<a href="dir_uk_ac_ic_doc.html">doc</a>/<a href="dir_uk_ac_ic_doc_neuralnets.html">neuralnets</a>/<strong>statistics</strong><br/>
+</p>
+
+<div class="section">
+<h2>Lines of Code</h2>
+<p class="chart"><img src="loc_module_uk_ac_ic_doc_neuralnets_statistics.png" alt="uk/ac/ic/doc/neuralnets/statistics/ Lines of Code" width="720" height="450" /></p></div>
+<div class="section">
+<h2>Developers</h2>
+  <table  rules="groups" summary="All authors and the number of their changes and lines of code in this directory">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="user_plc06.html" class="author">plc06</a></th>
+        <td>55 (100.0%)</td>
+        <td>1143 (100.0%)</td>
+        <td>20.7</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<div class="section">
+<h2>Most Recent Commits</h2>
+<dl class="commitlist">
+  <dt><a name="13"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-12-29 10:42</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">289</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Small tidy-up; removing old packages from repo that have since been factored out.
+    </p>
+    <p class="commitdetails"><strong>0</strong> lines of code changed in <span class="files">16 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        CSVStatistician.java&#160;<span class="del">(del)</span>,
+        ChartPlot.java&#160;<span class="del">(del)</span>,
+        ChartPlotPanel.java&#160;<span class="del">(del)</span>,
+        EdgeCreatedEvent.java&#160;<span class="del">(del)</span>,
+        Event.java&#160;<span class="del">(del)</span>,
+        GraphPlotStatistician.java&#160;<span class="del">(del)</span>,
+        MatlabMatrixStatistician.java&#160;<span class="del">(del)</span>,
+        NeuralNetworkSimulationEvent.java&#160;<span class="del">(del)</span>,
+        NodeCreatedEvent.java&#160;<span class="del">(del)</span>,
+        NodeFired.java&#160;<span class="del">(del)</span>,
+        NumericalEvent.java&#160;<span class="del">(del)</span>,
+        NumericalStatistician.java&#160;<span class="del">(del)</span>,
+        RealTimePlotStatistician.java&#160;<span class="del">(del)</span>,
+        RevalidateStatisticiansEvent.java&#160;<span class="del">(del)</span>,
+        Statistician.java&#160;<span class="del">(del)</span>,
+        StatisticsManager.java&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-12-08 15:03</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">250</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Made various factory and util methods fire events to signify node/edge X of Y has been created. Updated GUI AddNodesConfig to display proper progress bar - 50% for nodes, 50% for edges.
+    </p>
+    <p class="commitdetails"><strong>104</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        EdgeCreatedEvent.java&#160;<span class="new">(new&#160;30)</span>,
+        NodeCreatedEvent.java&#160;<span class="new">(new&#160;30)</span>,
+        StatisticsManager.java&#160;<span class="change">(+44&#160;-11)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-12-08 10:25</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">249</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added boolean isValid() method to Statisticians, to permit them to notify the StatisticsManager that they are no longer capable of receiving events. Events are now fired sensitive to super-classes (event handling propagates up the superclass tree). Added a RevalidateStatisticiansEvent, which when fired causes any invalid Statisticians to be removed and re-created using the PluginManager.
+    </p>
+    <p class="commitdetails"><strong>163</strong> lines of code changed in <span class="files">8 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+6&#160;-1)</span>,
+        GraphPlotStatistician.java&#160;<span class="change">(+4)</span>,
+        NeuralNetworkSimulationEvent.java&#160;<span class="new">(new&#160;28)</span>,
+        NumericalStatistician.java&#160;<span class="change">(+4)</span>,
+        RealTimePlotStatistician.java&#160;<span class="change">(+8&#160;-3)</span>,
+        RevalidateStatisticiansEvent.java&#160;<span class="new">(new&#160;14)</span>,
+        Statistician.java&#160;<span class="change">(+16)</span>,
+        StatisticsManager.java&#160;<span class="change">(+83&#160;-28)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-18 12:41</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">114</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed RealTimePlotStatistician to only create the chart GUI when it receives input data. GUIEdge has had its broken code removed (shouldn't have been checked in yet; needs some work still!) Refactored InhibitoryNodeSpecification to be spelt correctly
+    </p>
+    <p class="commitdetails"><strong>7</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(-4)</span>,
+        RealTimePlotStatistician.java&#160;<span class="change">(+7&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-11 14:02</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">88</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added a variety of Reflection oriented code, culminating in the @Persistable annotation, to indicate a given field / method can be persisted, and a MethodSelector object capable of getting a Set of {Methods / Fields / Methods and Fields all looking like Fields} from a given class, to choose what to persist. See AnnotationFinderTest for implementation example.
+    </p>
+    <p class="commitdetails"><strong>38</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlotPanel.java&#160;<span class="change">(+38&#160;-16)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-06 17:11</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">82</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Factored out a ChartPlotPanel to handle displaying of the Chart. It is its own ChartChangeListener (and registers itself to the chart). It also listens to arrow keypresses; left and right to scroll, up and down to zoom. Changes have been made to the passing around of values, in order to reduce the amount of copying going on.
+    </p>
+    <p class="commitdetails"><strong>144</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+5&#160;-54)</span>,
+        ChartPlotPanel.java&#160;<span class="new">(new&#160;100)</span>,
+        RealTimePlotStatistician.java&#160;<span class="change">(+39&#160;-11)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-05 18:25</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">76</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Initial implementation of graph scrolling, based on window size. Need to think about how to approach this from a UI perspective - draggable chart area, mouse wheel zooming? Do we want to scale the Y axis ever?
+    </p>
+    <p class="commitdetails"><strong>36</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+32&#160;-8)</span>,
+        GraphPlotStatistician.java&#160;<span class="change">(+4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-05 16:23</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">75</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Created a RealTimePlotStatistician to plot events as they occur. Adapted the ChartPlot to be concurrency friendly also. Uses semaphores to synchronise access to the chart's dataset. Made sure that the final flush() of the statistician definitely redraws the canvas.
+    </p>
+    <p class="commitdetails"><strong>121</strong> lines of code changed in <span class="files">3 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+53&#160;-25)</span>,
+        GraphPlotStatistician.java&#160;<span class="change">(-4)</span>,
+        RealTimePlotStatistician.java&#160;<span class="new">(new&#160;68)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-05 12:53</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">66</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Made ChartPlot repaint and thus resizable etc. TODO: Double buffer the graphics?
+    </p>
+    <p class="commitdetails"><strong>16</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+15&#160;-68)</span>,
+        GraphPlotStatistician.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-05 12:24</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">65</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Some tidying up of plugins (ensuring they catch #s properly)<br />
+Graph implementation now slightly prettier. Visual stuff all occurrs in ChartPlot.java - presently assumes XYPlot is used; should be safe for now.
+    </p>
+    <p class="commitdetails"><strong>29</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="change">(+23)</span>,
+        GraphPlotStatistician.java&#160;<span class="change">(+6&#160;-24)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-03 17:38</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">57</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Initial graphing statistician implementation.
+    </p>
+    <p class="commitdetails"><strong>197</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        ChartPlot.java&#160;<span class="new">(new&#160;107)</span>,
+        GraphPlotStatistician.java&#160;<span class="new">(new&#160;72)</span>,
+        NodeFired.java&#160;<span class="change">(+14)</span>,
+        NumericalEvent.java&#160;<span class="change">(+4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-03 14:15</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">51</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added win32 SWT jar<br />
+Altered StatisticsConfig to load multiple events for a single plugin instance, if requested.<br />
+Fixed PluginLoader to only load classes once
+    </p>
+    <p class="commitdetails"><strong>19</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        StatisticsManager.java&#160;<span class="change">(+19&#160;-7)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_plc06.html" class="author">plc06</a>
+    <span class="date">2008-11-03 09:09</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">49</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactored StatisticsManager to use the plugin system.<br />
+Implemented Configuration system - uses pluggable configurators; See util.configuration package for details.
+    </p>
+    <p class="commitdetails"><strong>269</strong> lines of code changed in <span class="files">8 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/statistics</strong>:
+        CSVStatistician.java&#160;<span class="new">(new&#160;39)</span>,
+        Event.java&#160;<span class="new">(new&#160;12)</span>,
+        MatlabMatrixStatistician.java&#160;<span class="new">(new&#160;45)</span>,
+        NodeFired.java&#160;<span class="new">(new&#160;26)</span>,
+        NumericalEvent.java&#160;<span class="new">(new&#160;11)</span>,
+        NumericalStatistician.java&#160;<span class="new">(new&#160;38)</span>,
+        Statistician.java&#160;<span class="new">(new&#160;15)</span>,
+        StatisticsManager.java&#160;<span class="new">(new&#160;83)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+</div><div id="generatedby">Generated by <a href="http://www.statsvn.org">StatSVN</a> 0.4.1</div>
+</body>
+</html>

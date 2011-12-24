@@ -1,0 +1,1618 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 0.4b
+% see http://www.hj-gym.dk/~hj/writer2latex for more info
+\documentclass[12pt,twoside]{article}
+\usepackage[ascii]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{calc}
+\usepackage{longtable}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=blue, pagecolor=blue, urlcolor=blue}
+% List styles
+\newcommand\liststyleLi{%
+\renewcommand\labelitemi{{\textbullet}}
+\renewcommand\labelitemii{${\circ}$}
+\renewcommand\labelitemiii{${\blacksquare}$}
+\renewcommand\labelitemiv{{\textbullet}}
+}
+\newcommand\liststyleLii{%
+\renewcommand\labelitemi{{\textbullet}}
+\renewcommand\labelitemii{${\circ}$}
+\renewcommand\labelitemiii{${\blacksquare}$}
+\renewcommand\labelitemiv{{\textbullet}}
+}
+\newcommand\liststyleLiii{%
+\renewcommand\labelitemi{{\textbullet}}
+\renewcommand\labelitemii{${\circ}$}
+\renewcommand\labelitemiii{${\blacksquare}$}
+\renewcommand\labelitemiv{{\textbullet}}
+}
+% Pages styles (master pages)
+\makeatletter
+\newcommand\ps@Standard{%
+\renewcommand\@oddhead{plc06 / jv06 / ctm06 / ig106 / sjw06\hfill \hfill Artificial Neural Network Editor (ANNE) Report}%
+\renewcommand\@evenhead{\@oddhead}%
+\renewcommand\@oddfoot{\hfill Page \thepage{} of ?}%
+\renewcommand\@evenfoot{\@oddfoot}%
+\setlength\paperwidth{20.999cm}\setlength\paperheight{29.699cm}\setlength\voffset{-1in}\setlength\hoffset{-1in}\setlength\topmargin{2cm}\setlength\headheight{12pt}\setlength\headsep{0.499cm}\setlength\footskip{12pt+0.499cm}\setlength\textheight{29.699cm-2cm-2cm-0.499cm-12pt-0.499cm-12pt}\setlength\oddsidemargin{2cm}\setlength\textwidth{20.999cm-2cm-2cm}
+\renewcommand\thepage{\arabic{page}}
+\setlength{\skip\footins}{0.101cm}\renewcommand\footnoterule{\vspace*{-0.018cm}\noindent\textcolor{black}{\rule{0.25\columnwidth}{0.018cm}}\vspace*{0.101cm}}
+}
+\makeatother
+\pagestyle{Standard}
+\setlength\tabcolsep{1mm}
+\renewcommand\arraystretch{1.3}
+% footnotes configuration
+\makeatletter
+\renewcommand\thefootnote{\arabic{footnote}}
+\makeatother
+\everymath{\displaystyle}
+\begin{document}
+{\bfseries
+Persistence Overview}
+
+{\mdseries
+}
+
+\begin{center}
+\begin{minipage}{10cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Illustration 1:
+Persistence's location within the framework.
+\par}
+\end{minipage}\end{center}
+{\mdseries
+Illustration 1 provides a view of how persistence is located within the
+framework, its dependencies and modules that depend on it. Obviously
+the user interface is dependent on the persistence module being present
+for the ability to save or load neural networks which have been
+designed within the application. Persistence depends on the model of
+these networks, a few core utilities and events for serialization and
+de{}-serialization of networks. This is coherent with the low coupling
+design of the framework.}
+
+
+\bigskip
+
+{\mdseries
+}
+
+\begin{center}
+\begin{minipage}{17cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Illustration 2: Persistence Modules
+Implementation.
+\par}
+\end{minipage}\end{center}
+{\mdseries
+Illustration 2 is an overview of all the classes and interfaces within
+the Persistence module and their package separation. XML and TNS have
+their own packages as they required specific classes for their
+implementation, where Java Serialization makes use of the in built Java
+ability to serialization objects to a persistable storage location, X3D
+is dependent on XML but required no other classes apart from its own
+for its persistence.}
+
+\clearpage{\bfseries
+Persistence Design}
+
+{\mdseries
+The persistence layer has been designed like many aspects of the
+application to be completely plug{}-able with new extension, adding a
+plug{}-in requires no existing code to be changed and your new
+plug{}-in to extend the \textit{SaveService}\textup{ for saving
+networks and }\textit{LoadService}\textup{ for loading networks, these
+abstract classes provide the method headers for creating persistence
+services. A new plug{}-in doesn't have to implement
+both loading and saving, as in the case with the X3D service which is
+only available for exporting networks too.}}
+
+{\mdseries\upshape
+}
+
+\begin{center}
+\begin{minipage}{10cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Figure 1: View of Open Dialogue, Available
+files are highlighted.
+\par}
+\end{minipage}\end{center}
+{\mdseries\upshape
+A number of persistence plug{}-ins are provided with the standard
+distribution, they are:}
+
+\liststyleLi
+\begin{itemize}
+\item \textmd{\textit{Java
+Serialization}}\footnote{ttp://java.sun.com/j2se/1.4.2/docs/api/java/io/Serializable.html}\textmd{\textup{
+{--} the network is serialized using the Java Serializable interface,
+this is used as the default persistence option and preferred over the
+other modules, especially when not transporting the neural network to
+another application. This is because it is extremely fast and
+guarantees that all information is persisted and that will be able to
+be loaded again. As the serialized network is the actual objects of our
+implementation, the only applications that would be able to make use of
+this format is one which uses our classes for network representation.
+Files are given the }}\textmd{\textit{.net}}\textmd{\textup{
+extension.}}
+\item {\itshape
+\textmd{NeuroML}\footnote{http://www.neuroml.org/}\textmd{
+(XML)}\textmd{\textup{ {--} this is the main persistence module for
+exporting to a number of other applications that also support the
+NeuroML Layer 3 Network Schema for representing in neural networks.
+Import is also supported for taking NeuroML for other applications that
+also use this schema, allowing for some cross{}-application
+computability. The XML that is generated is well{}-formed and NeuroML
+validated, meaning that other applications should accept this format
+without errors. Files are given the }}\textmd{.xml}\textmd{\textup{
+extension.}}}
+\item {\itshape
+\textmd{TextNetworkSerializer}\textmd{\textup{ {--} is a simple export
+and import specification which outputs records of all the objects into
+ASCII format for storage, it is however a non{}-standard format which
+is only implemented by our application so it cannot be used for
+exporting to or importing from other application. It does however have
+a low storage overhead compared to XML as records are separated by new
+lines and values by commas. Files are given the
+}}\textmd{.tns}\textmd{\textup{ extension.}}}
+\item {\itshape
+\textmd{X3D}\textmd{\textup{ {--} is a royalty{}-free open standards
+file format and run{}-time architecture to represent and communicate 3D
+scenes and objects using
+XML}}\footnote{http://www.web3d.org/about/overview/}\textmd{\textup{.
+We implemented only an export feature to X3D as applications that
+implement this standard are designed for viewing, not modelling items,
+also the feature is implemented by an XSL transformation from our
+NeuroML that is generated and we chose not to implement an XSLT for
+transforming from X3D to NeuroML. Files are given the
+}}\textmd{.x3d}\textmd{\textup{ extension.}}}
+\end{itemize}
+
+\bigskip
+
+{\itshape
+\textmd{\textup{Further plug{}-ins for persistence which would expand
+the project could include
+PyNN}}\footnote{http://neuralensemble.org/trac/PyNN/}\textmd{\textup{
+and the Neural Network Tool within
+Matlab}}\footnote{http://www.mathworks.com/access/helpdesk/help/toolbox/nnet/index.html}\textmd{\textup{.}}}
+
+\clearpage{\bfseries\upshape
+Persistence Implementation}
+
+{\mdseries\upshape
+As previously mentioned with the highly pluggable architecture, loading
+and saving is abstract out as far as possibly into plug{}-ins, all
+loading and saving is handled by their respective managers which is the
+last point in the chain of the core system before becoming plug{}-ins.
+Its the managers job to take a load or save specification which
+includes information about where to write or read too and also which
+plug{}-in to use to perform the persistence operation. The manager then
+loads the required plug{}-in before making the appropriate method
+calls.}
+
+
+\bigskip
+
+{\mdseries\itshape
+\textup{Networks must be saveable and/or serializable to be used with
+the }SaveManager \textup{and save plug{}-ins, further still any object
+that has parameters or variables that require being persisted to
+storage must have them annotated with the annotation
+}@persistable\textup{, this is for when an object is being persisted
+it, reflection can be used to retrieve all information from the object
+that needs to be exported. It is also used when loading persisted
+information and populating information in objects when they are created
+on reading a persisted network.}}
+
+
+\bigskip
+
+{\mdseries\upshape
+Serialization was the simplest implementation as it makes use of
+Java's ability to serialize objects to file and allow
+them to be read back in, as the loading plug{}-ins are used for when a
+user wishes to insert a network from file into one which they are
+editing currently, after the network is loaded, objects must have their
+Ids regenerated to prevent Id conflictions.}
+
+
+\bigskip
+
+{\mdseries\upshape
+TNS and NeuroML are implemented in a very similar way, the some
+difference is when information is output, NeuroML has to conform to the
+NeuroML schema, which specifies that networks and their neurones must
+be output and then the synapses, TNS outputs objects as it gets them.
+This requires NeuroML to buffer some information so that it can be
+output at the correct time. NeuroML does a breadth first search of the
+network to discover all the networks and network bridges that are in
+the network being persisted.}
+
+
+\bigskip
+
+{\mdseries\itshape
+\textup{Importing TNS and NeuroML is more interesting, TNS read each
+line of the file, as each record is a single line, and then can form
+the complete object as all the information is provided within the
+record, this can then be used when all the information has been loaded
+and objects created to link up the whole network before returning the
+completed network. With the NeuroML however information is note only
+stored in a single tag, but multiple tags, including meta{}-data tags,
+this requires more information to be stored and lead to the
+}PartialObject\textup{ idea, which stores information until completed
+and then will produce the desired object with parameters set as it
+knows. More information needed to be stored because the XML parser that
+was used to read the XML was SAX (Simple API for
+XML)}\footnote{http://www.saxproject.org/}\textup{ SAX is event driven
+and dependent on what the parser has read at that time is what you
+receive. So depending on the type of tag seen, if it is an opening tag
+for a neurone, network or synapse then a partial object is placed on a
+stack, as further meta{}-data seen is relevant to the last seen partial
+object. Then on closing tags for neurone, network or synapse, the
+partial object creates the complete object based on the parameters that
+it has stored and returns it. At the end of the document the network is
+connected up with sub{}-networks and the final network can be
+retrieved. Objects that require methods to be called other than the
+standard constructer when being loaded from persisted storage may
+create methods that are persistable but have no value, so that they are
+called when loaded, any further method calls can be placed within that
+single public }}
+
+
+\bigskip
+
+{\bfseries\itshape
+\textmd{\textup{X3D is currently depended on the XML persistence
+plug{}-in as the network must first be exported to XML, the XML file is
+then read and an extensible style sheet (XSL) is applied to the XML to
+transform it to the X3D schema. X3D persistence was implemented this
+way because it was a quick addition as the XSL was already available
+from the NeuroML
+project}}\footnote{http://www.neuroml.org/NeuroMLValidator/NeuroMLFiles/Schemata/v1.7.2/Level3/NeuroML\_Level3\_v1.7.2\_X3D.xsl}\textmd{\textup{.
+This implementation is not ideal as it makes use of the Java XML
+libraries}}\footnote{http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Transformer.html}\textmd{\textup{,
+which has problems when applying an XSL transformation to a large XML
+document, which is why in Persistence Performance Analysis no data is
+available for save execution time and file size for X3D documents with
+a node count over 100. Dependencies on other plug{}-ins is resolved by
+the Plug{}-in Manager and so not an issue for the Persistence
+Module.}}}
+
+\clearpage{\bfseries\upshape
+Persistence Examples}
+
+{\mdseries\upshape
+For reference, across the following pages are examples of an exported
+network in NeuroML, TNS and X3D, Java serialization
+wasn't included as it is not a human readable form.}
+
+
+\bigskip
+
+{\mdseries\upshape
+The example network is two Excitatory Spiking Neurones with synapses to
+each other and themselves (otherwise known as 100\% connectivity). A
+view of the network in the ANNE tool is shown below:}
+
+
+\bigskip
+
+{\upshape
+}
+
+\begin{center}
+\begin{minipage}{17cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Figure 2: View of the example network in
+ANNE.
+\par}
+\end{minipage}\end{center}
+{\upshape
+It is easy to see that the TNS output is very light but hard to
+interpret by reading, on the contrary, both the XML formats \ are very
+long but very intuitive to read. Its also clear that the X3D output has
+lost a large amount of information on the neural network, which is the
+main reason why no importer for X3D was written.}
+
+
+\bigskip
+
+{\upshape
+}
+
+\begin{center}
+\begin{minipage}{10.06cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Figure 3: View of a Network produced in ANNE
+displayed in Octaga.
+\par}
+\end{minipage}\end{center}
+{\upshape
+Above is an example of the X3D output from ANNE being loaded into an X3D
+viewer called Octaga\footnote{http://www.octaga.com}. This allows users
+to view their networks in 3D if they find that feature useful and
+demonstrates some of the inter{}-application support within ANNE.}
+
+
+\bigskip
+
+\begin{longtable}[c]{|p{14.8cm}|}
+\hline
+{\sffamily
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}?xml}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.2,0.47843137,0.5294118}{version}}\texttt{\textcolor{black}{=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.2,0.47843137,0.5294118}{encoding}}\texttt{\textcolor{black}{=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}UTF{}-8{\textquotedbl}}}\texttt{\textcolor{black}{?}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}}
+
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{networkml
+xmlns=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}http://morphml.org/networkml/schema{\textquotedbl}}}
+
+\texttt{\textcolor{black}{\ \ xmlns:xsi=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}http://www.w3.org/2001/XMLSchema{}-instance{\textquotedbl}}}
+
+\texttt{\textcolor{black}{\ \ xmlns:meta=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}http://morphml.org/metadata/schema{\textquotedbl}}}
+
+\texttt{\textcolor{black}{\ \ xsi:schemaLocation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}http://morphml.org/networkml/schema/Schemata/v1.7.3/Level3/NetworkML\_v1.7.3.xsd{\textquotedbl}}}
+
+\texttt{\textcolor{black}{lengthUnits=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}micron{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:notes}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}\texttt{\textcolor{black}{Produced
+by ANNE: the Artifical Neural Network
+Editor}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:notes}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{populations}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{population
+name=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}14{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{instances
+size=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{instance
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}16{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.SpikingNeurone{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}postSpikeReset{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}{}-56.17718294810968{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}z{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}recoverySensitivity{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.2{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}recoveryScale{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.02{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}x{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}73{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}trigger{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}30.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}charge{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}{}-65.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}y{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}26{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}pSRRecovery{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}4.0027868923975625{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{location
+x=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}73{\textquotedbl}}}\texttt{\textcolor{black}{
+y=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}26{\textquotedbl}}}\texttt{\textcolor{black}{
+z=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{instance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{instance
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}15{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.SpikingNeurone{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}postSpikeReset{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}{}-58.618716832163614{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}z{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}recoverySensitivity{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.2{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}recoveryScale{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.02{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}x{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}456{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}trigger{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}30.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}charge{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}{}-65.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}y{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}292{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}pSRRecovery{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}4.551832219630733{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{location
+x=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}456{\textquotedbl}}}\texttt{\textcolor{black}{
+y=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}292{\textquotedbl}}}\texttt{\textcolor{black}{
+z=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{instance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{instances}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{population}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{populations}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{projections
+units=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Physiological
+Units{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{projection
+name=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Network{}-Synapses{\textquotedbl}}}\texttt{\textcolor{black}{
+source=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}14{\textquotedbl}}}\texttt{\textcolor{black}{
+target=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}14{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{synapse\_props
+synapse\_type=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.Synapse{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{connections
+size=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}4{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{connection
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}17{\textquotedbl}}}\texttt{\textcolor{black}{
+pre\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}16{\textquotedbl}}}\texttt{\textcolor{black}{
+post\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}16{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{properties
+weight=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.8604082982707334{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.Synapse{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{connection}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{connection
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}20{\textquotedbl}}}\texttt{\textcolor{black}{
+pre\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}15{\textquotedbl}}}\texttt{\textcolor{black}{
+post\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}15{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{properties
+weight=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.5024901465406223{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.Synapse{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{connection}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{connection
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}18{\textquotedbl}}}\texttt{\textcolor{black}{
+pre\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}16{\textquotedbl}}}\texttt{\textcolor{black}{
+post\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}15{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{properties
+weight=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.270062017417825{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}
+}}\texttt{\textcolor{black}{value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.Synapse{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{connection}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{connection
+id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}19{\textquotedbl}}}\texttt{\textcolor{black}{
+pre\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}15{\textquotedbl}}}\texttt{\textcolor{black}{
+post\_cell\_id=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}16{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{properties
+weight=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.13243622803794775{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{meta:property
+tag=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}instance\_type{\textquotedbl}}}\texttt{\textcolor{black}{
+value=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}uk.ac.ic.doc.neuralnets.graph.neural.Synapse{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{meta:properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{properties}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{connection}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{connections}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{projection}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{projections}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{networkml}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+\\\hline
+\end{longtable}
+{\raggedleft\itshape
+Code 1: Example network in NeuroML (XML) format.
+\par}
+
+\begin{longtable}[c]{|p{14.8cm}|}
+\hline
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}?xml}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.2,0.47843137,0.5294118}{version}}\texttt{\textcolor{black}{=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1.0{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.2,0.47843137,0.5294118}{encoding}}\texttt{\textcolor{black}{=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}UTF{}-8{\textquotedbl}}}\texttt{\textcolor{black}{?}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{X3D
+profile=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Immersive..{\textquotedbl}}}\texttt{\textcolor{black}{
+}}\texttt{\textcolor[rgb]{0.2,0.47843137,0.5294118}{version}}\texttt{\textcolor{black}{=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2.0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Scene}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Background
+skyColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.6
+0.7
+0.9{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Viewpoint
+description=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Down
+z axis, 500 microns away{\textquotedbl}}}\texttt{\textcolor{black}{
+position=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+0
+500{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Viewpoint
+description=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Down
+z axis, 200 microns away{\textquotedbl}}}\texttt{\textcolor{black}{
+position=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+0
+200{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Viewpoint
+description=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}Down
+z axis, 2mm away{\textquotedbl}}}\texttt{\textcolor{black}{
+position=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+0
+2000{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+rotation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+0 1
+{}-1.570795{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cylinder
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}200{\textquotedbl}}}\texttt{\textcolor{black}{
+radius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.5{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+translation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+105
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cone
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}10{\textquotedbl}}}\texttt{\textcolor{black}{
+bottomRadius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}\texttt{\textcolor{black}{
+\ \ \ }}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cylinder
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}200{\textquotedbl}}}\texttt{\textcolor{black}{
+radius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.5{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+translation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+105
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cone
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}10{\textquotedbl}}}\texttt{\textcolor{black}{
+bottomRadius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+rotation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1
+0 0
+1.570795{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1
+0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cylinder
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}200{\textquotedbl}}}\texttt{\textcolor{black}{
+radius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0.5{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+translation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+105
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1
+0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Cone
+height=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}10{\textquotedbl}}}\texttt{\textcolor{black}{
+bottomRadius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}1{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+translation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}73
+\ 26
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Sphere
+radius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}5{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform
+translation=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}456
+\ 292
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material
+diffuseColor=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Sphere
+radius=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}5{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.13725491,0.43137255,0.14509805}{{\textless}!{}-{}-Projection
+Network{}-Synapses between 14 and 14{}-{}-{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{LineSet
+vertexCount=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Coordinate
+point=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}73
+\ 26 \ 0, 73 \ 26
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Color
+color=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1 0, 1 0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{LineSet}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}\texttt{\textcolor{black}{
+\ }}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+\\
+\end{longtable}
+\begin{longtable}[c]{|p{14.8cm}|}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{LineSet
+vertexCount=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Coordinate
+point=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}456
+\ 292 \ 0, 456 \ 292
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Color
+color=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1 0, 1 0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{LineSet}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{LineSet
+vertexCount=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Coordinate
+point=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}73
+\ 26 \ 0, 456 \ 292
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Color
+color=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1 0, 1 0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{LineSet}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Material}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Appearance}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{LineSet
+vertexCount=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}2{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Coordinate
+point=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}456
+\ 292 \ 0, 73 \ 26
+\ 0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}}}\texttt{\textcolor{black}{Color
+color=}}\texttt{\textcolor[rgb]{0.5019608,0.07058824,0.7019608}{{\textquotedbl}0
+1 0, 1 0
+0{\textquotedbl}}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{/{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{LineSet}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Shape}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ \ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Transform}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor{black}{\ \ }}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{Scene}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+
+\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textless}/}}\texttt{\textcolor{black}{X3D}}\texttt{\textcolor[rgb]{0.6509804,0.09019608,0.0}{{\textgreater}}}
+\\\hline
+\end{longtable}
+{\raggedleft\itshape
+Code 2: Example network in X3D (XML) format.
+\par}
+
+
+\bigskip
+
+\begin{longtable}[c]{|p{14.8cm}|}
+\hline
+{\ttfamily
+13,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,}
+
+{\ttfamily
+13,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,}
+
+{\ttfamily
+13,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,}
+
+{\ttfamily
+14,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,13}
+
+{\ttfamily
+14,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,}
+
+{\ttfamily
+14,uk.ac.ic.doc.neuralnets.graph.neural.NeuralNetwork,@@,}
+
+{\ttfamily
+16,uk.ac.ic.doc.neuralnets.graph.neural.SpikingNeurone,@@postSpikeReset={}-56.17718294810968@@z=0@@recoverySensitivity=0.2@@recoveryScale=0.02@@x=73@@trigger=30.0@@charge={}-65.0@@y=26@@pSRRecovery=4.0027868923975625@@,14}
+
+{\ttfamily
+15,uk.ac.ic.doc.neuralnets.graph.neural.SpikingNeurone,@@postSpikeReset={}-58.618716832163614@@z=0@@recoverySensitivity=0.2@@recoveryScale=0.02@@x=456@@trigger=30.0@@charge={}-65.0@@y=292@@pSRRecovery=4.551832219630733@@,14}
+
+{\ttfamily
+17,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,14}
+
+{\ttfamily
+17,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,16:16:{}-1}
+
+{\ttfamily
+17,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,16:16:{}-1}
+
+{\ttfamily
+19,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,14}
+
+{\ttfamily
+19,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,15:16:{}-1}
+
+{\ttfamily
+19,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,15:16:{}-1}
+
+{\ttfamily
+18,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,14}
+
+{\ttfamily
+18,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,16:15:{}-1}
+
+{\ttfamily
+18,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,16:15:{}-1}
+
+{\ttfamily
+20,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,14}
+
+{\ttfamily
+20,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,15:15:{}-1}
+
+{\ttfamily
+20,uk.ac.ic.doc.neuralnets.graph.neural.Synapse,@@,15:15:{}-1}
+\\\hline
+\end{longtable}
+{\raggedleft\mdseries\itshape
+Code 3: Example network in Text Network Serializer format.
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+\clearpage{\bfseries\upshape
+Persistence Performance}
+
+
+\bigskip
+
+{\mdseries\upshape
+Networks were generated with the number of excitatory spiking neurones
+as specified in the table and a 100\% connectivity probability,
+networks were regenerated when changing between sizes.}
+
+
+\bigskip
+
+{\bfseries\itshape
+\textmd{\textup{Benchmarking }}\textmd{\textup{System:}}}
+
+\liststyleLii
+\begin{itemize}
+\item {\mdseries\upshape
+CPU  {}- 2.33GHz Core 2 Duo}
+\item {\mdseries\upshape
+Memory  {}- 2GB, 667MHz DDR2}
+\item {\mdseries\upshape
+Hard Disk {}- 160GB, 5,400rpm, 16MB cache.}
+\item \textmd{\textup{File System {}-
+}}\foreignlanguage{english}{\textmd{\textup{Journaled}}}\textmd{\textup{
+HFS+}}
+\item {\mdseries\upshape
+OS  {}- Mac OS X 10.5.6}
+\end{itemize}
+
+\bigskip
+
+\begin{longtable}[c]{|p{2.799cm}|p{2.8cm}|p{2.8cm}|p{2.8cm}|p{2.8cm}|}
+\hline
+{\centering
+Network Size
+\par}
+&
+{\centering
+Java Serialization
+\par}
+&
+{\centering
+NeuroML (XML)
+\par}
+&
+{\centering
+TNS
+\par}
+&
+{\centering
+X3D
+\par}
+\\\hline
+{\raggedleft
+10
+\par}
+&
+{\raggedleft\color{black}
+0.01
+\par}
+&
+{\raggedleft\color{black}
+0.00
+\par}
+&
+{\raggedleft\color{black}
+0.00
+\par}
+&
+{\raggedleft\color{black}
+0.06
+\par}
+\\\hline
+{\raggedleft
+50
+\par}
+&
+{\raggedleft
+0.19
+\par}
+&
+{\raggedleft
+0.06
+\par}
+&
+{\raggedleft
+0.00
+\par}
+&
+{\raggedleft
+0.48
+\par}
+\\\hline
+{\raggedleft
+100
+\par}
+&
+{\raggedleft
+0.74
+\par}
+&
+{\raggedleft
+0.65
+\par}
+&
+{\raggedleft
+0.00
+\par}
+&
+{\raggedleft
+4.25
+\par}
+\\\hline
+{\raggedleft
+500
+\par}
+&
+{\raggedleft
+16.97
+\par}
+&
+{\raggedleft
+5.43
+\par}
+&
+{\raggedleft
+4.27
+\par}
+&
+
+\bigskip
+\\\hline
+{\raggedleft
+1000
+\par}
+&
+{\raggedleft
+74.33
+\par}
+&
+{\raggedleft
+19.95
+\par}
+&
+{\raggedleft
+24.36
+\par}
+&
+
+\bigskip
+\\\hline
+\end{longtable}
+{\raggedleft\itshape
+Table 1: Persistence Performance Analysis {}- Save Execution Time
+\par}
+
+
+\bigskip
+
+\begin{longtable}[c]{|p{3.55cm}|p{3.55cm}|p{3.55cm}|p{3.55cm}|}
+\hline
+{\centering
+Network Size
+\par}
+&
+{\centering
+Java Serialization
+\par}
+&
+{\centering
+NeuroML (XML)
+\par}
+&
+{\centering
+TNS
+\par}
+\\\hline
+{\raggedleft
+10
+\par}
+&
+{\raggedleft\color{black}
+0.06
+\par}
+&
+{\raggedleft\color{black}
+0.15
+\par}
+&
+{\raggedleft\color{black}
+0.05
+\par}
+\\\hline
+{\raggedleft
+50
+\par}
+&
+{\raggedleft
+0.35
+\par}
+&
+{\raggedleft
+0.41
+\par}
+&
+{\raggedleft
+0.23
+\par}
+\\\hline
+{\raggedleft
+100
+\par}
+&
+{\raggedleft
+1.01
+\par}
+&
+{\raggedleft
+0.71
+\par}
+&
+{\raggedleft
+0.69
+\par}
+\\\hline
+{\raggedleft
+500
+\par}
+&
+{\raggedleft
+23.37
+\par}
+&
+{\raggedleft
+11.21
+\par}
+&
+{\raggedleft
+20.29
+\par}
+\\\hline
+{\raggedleft
+1000
+\par}
+&
+{\raggedleft
+94.67
+\par}
+&
+{\raggedleft
+57.14
+\par}
+&
+{\raggedleft
+2091.74
+\par}
+\\\hline
+\end{longtable}
+{\raggedleft\itshape
+Table 2: Persistence Performance Analysis {}- Load Execution Time
+\par}
+
+
+\bigskip
+
+\begin{longtable}[c]{|p{2.799cm}|p{2.8cm}|p{2.8cm}|p{2.8cm}|p{2.8cm}|}
+\hline
+{\centering
+Network Size
+\par}
+&
+{\centering
+Java Serialization
+\par}
+&
+{\centering
+NeuroML (XML)
+\par}
+&
+{\centering
+TNS
+\par}
+&
+{\centering
+X3D
+\par}
+\\\hline
+{\raggedleft
+10
+\par}
+&
+{\raggedleft\color{black}
+11196
+\par}
+&
+{\raggedleft\color{black}
+37893
+\par}
+&
+{\raggedleft\color{black}
+14192
+\par}
+&
+{\raggedleft\color{black}
+21528
+\par}
+\\\hline
+{\raggedleft
+50
+\par}
+&
+{\raggedleft
+190396
+\par}
+&
+{\raggedleft
+784778
+\par}
+&
+{\raggedleft
+311878
+\par}
+&
+{\raggedleft
+476128
+\par}
+\\\hline
+{\raggedleft
+100
+\par}
+&
+{\raggedleft
+733896
+\par}
+&
+{\raggedleft
+3065153
+\par}
+&
+{\raggedleft
+1230880
+\par}
+&
+{\raggedleft
+1885870
+\par}
+\\\hline
+{\raggedleft
+500
+\par}
+&
+{\raggedleft
+17861896
+\par}
+&
+{\raggedleft
+74209903
+\par}
+&
+{\raggedleft
+33611758
+\par}
+&
+
+\bigskip
+\\\hline
+{\raggedleft
+1000
+\par}
+&
+{\raggedleft
+71221896
+\par}
+&
+{\raggedleft
+296670598
+\par}
+&
+{\raggedleft
+125334485
+\par}
+&
+
+\bigskip
+\\\hline
+\end{longtable}
+{\raggedleft\itshape
+Table 3: Persistence Peformance Analysis {}- File Size
+\par}
+
+
+\bigskip
+
+{\upshape
+\textbf{\textit{Note:}} Graphs depicting the information in the above
+tables can be found on the following page.}
+
+
+\bigskip
+
+{\upshape
+The obvious first point is that X3D failed to successfully produce any
+output on networks of size 500 and 1000, after further debugging the
+problem lies with the Java XML Transformer which is incapable from
+transforming large XML documents. Also because of the implementation,
+nearly twice as much storage is required during export, as the XML
+document needs to be produced so that it can then be read and can only
+be deleted after completion. Its clear that a future release of the X3D
+plug{}-in should be implemented in a more efficient way.}
+
+
+\bigskip
+
+{\upshape
+NeuroML and Serialization grow linearly on a logarithmic graph for Save
+and Loading time suggesting that their execution time would predictably
+grow with larger networks and would be easily estimated with network
+sizes within the range of network sizes sampled. NeuroML does generally
+perform better than Java Serialization, especially with large networks,
+however this is offset by NeuroML having a considerably larger
+resulting file size than Serialization, which with ever increasing
+networks would start to cause problems, an option of compressing the
+output of the text based persistence methods could provide further
+persistence options to the user.}
+
+\clearpage{\mdseries\upshape
+}
+
+\begin{center}
+\begin{minipage}{17cm}
+{\raggedleft\itshape
+ [Warning: Image not found] Graph 1: Performance Analysis Graphs
+\par}
+\end{minipage}\end{center}
+{\mdseries\upshape
+TNS has some interesting cases, firstly that for networks below 100
+neurones in it requires significantly less time than all other
+persistence methods and requires no more time for up to 100. After this
+it rises sharply but looks to begin levelling out to the same rate of
+increase as NeuroML and Serialization. File sizes generated are less
+than NeuroML but not as small as Serialization and the load time is
+good, but insignificantly different from serialization or NeuroML.}
+
+
+\bigskip
+
+{\mdseries\upshape
+A performance metric was calculated that took into account the loading
+and save times, as well as the file size generated, compared to the
+network being persisted. The performance metric was as follows:}
+
+
+\bigskip
+
+{\mdseries\upshape
+ $\text{Performance Metric}=\frac{\text{Load Time}+\text{Save
+Time}}{\text{File Size}}$ }
+
+
+\bigskip
+
+{\mdseries\upshape
+A lower value implies better peformance, as we can see from the graph
+which plots the metric against the network size that Java Serialization
+is the obvious winning, that was to be expected as even though it has a
+poor saving time it produces significantly smaller files than the other
+persistence methods and requires no extra time for loading. TNS and
+NeuroML look to be improving after reaching an initial storage overhead
+on network size, TNS beating NeuroML though because of the smaller file
+sizes produced. X3D was included for completeness, but now real
+information can be taken from the graph as X3D has no load time and
+could not complete all the tests.}
+
+
+\bigskip
+
+{\mdseries\upshape
+Its worth noting that this performance analysis was only a fleeting look
+at persistences real world performance and tests were only run once
+instead of multiple times to verify results. This means little more
+statistical analysis can be done on these results as there
+isn't the required information.}
+
+\clearpage{\bfseries\upshape
+Persistence Evaluation and Further Development}
+
+
+\bigskip
+
+{\mdseries\upshape
+The Persistence module provides an easy and extensible way of
+implementing persistence plug{}-ins which can export the neural network
+model to storage or possibly another application. The initial
+persistence plug{}-ins provide the average user with a number of
+options for saving and exporting, with Java Serialization the recommend
+method for saving a neural network for use with other instances of the
+ANNE application or incremental backup. NeuroML export is available for
+transferring your network to other applications and importing back from
+it.}
+
+
+\bigskip
+
+{\mdseries\upshape
+Due to the plug{}-in nature, further version of a persistence option
+would not require to be released at the same time as the core
+framework, allowing for them to be worked on and released separately.
+New persistence options could be added later on if required for
+exporting to more specific or propriety formats, this would allow
+developers of other applications, perhaps closed{}-source to write
+their own plug{}-in to read their application output which could be
+distributed without having to reveal a specification of their file
+format. This ease of implementation would hopefully help ANNE become a
+more popular solution to model neural networks with.}
+
+
+\bigskip
+
+{\mdseries\upshape
+Further development other persistence could include:}
+
+\liststyleLiii
+\begin{itemize}
+\item {\mdseries\upshape
+Further performance analysis of all the persistence plug{}-in and
+optimizations of their code to improve execution time and memory
+usage.}
+\item {\mdseries\upshape
+The option for file compression after export would reduce the file sizes
+produced but obviously at a cost of execution time. There may be a
+point where a network reaches a certain size that it may be necessary
+to compress the output file, already with 1000 neurones, NeuroML files
+reach 280MB, which even with current hard drive capacities is a large
+file. With the option to saved to a compressed format, automatic
+decompression of files when loading would be required so that the new
+compressed files where supported. Perhaps a flag in each persistence
+plug{}-in for compression with compression itself being another
+persistence plug{}-in.}
+\item {\mdseries\upshape
+X3D's current implementation is incapable of exporting
+large networks because of the problems using XSL transformation on
+large XML documents. A bespoke plug{}-in which is not dependent on the
+NeuroML plug{}-in would probably be the best implementation. Also this
+would reduce the amount of storage required for export as currently an
+XML must be produced before being read again and then deleted.}
+\item {\mdseries\upshape
+Further persistence options such as exporting to other neural network
+modelling standards and file formats such as the previously mentions
+PyNN and Mat{}-labs Neural Network tool.}
+\item {\mdseries\upshape
+An auto{}-save feature would be a positive addition, meaning that users
+aren't required to remember to periodically save their
+work, incase of mistake or system failure. It could be implemented by
+creating another thread which sleeps for the auto{}-save time period
+and then fires the save manager off before sleeping again.}
+\end{itemize}
+\end{document}

@@ -1,0 +1,127 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 0.4b
+% see http://www.hj-gym.dk/~hj/writer2latex for more info
+\documentclass[12pt,twoside]{article}
+\usepackage[ascii]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{calc}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=blue, pagecolor=blue, urlcolor=blue}
+% List styles
+\newcommand\liststyleLi{%
+\renewcommand\labelitemi{{\textbullet}}
+\renewcommand\labelitemii{${\circ}$}
+\renewcommand\labelitemiii{${\blacksquare}$}
+\renewcommand\labelitemiv{{\textbullet}}
+}
+% Pages styles (master pages)
+\makeatletter
+\newcommand\ps@Standard{%
+\renewcommand\@oddhead{}%
+\renewcommand\@evenhead{}%
+\renewcommand\@oddfoot{}%
+\renewcommand\@evenfoot{}%
+\setlength\paperwidth{20.999cm}\setlength\paperheight{29.699cm}\setlength\voffset{-1in}\setlength\hoffset{-1in}\setlength\topmargin{2cm}\setlength\headheight{12pt}\setlength\headsep{0cm}\setlength\footskip{12pt+0cm}\setlength\textheight{29.699cm-2cm-2cm-0cm-12pt-0cm-12pt}\setlength\oddsidemargin{2cm}\setlength\textwidth{20.999cm-2cm-2cm}
+\renewcommand\thepage{\arabic{page}}
+\setlength{\skip\footins}{0.101cm}\renewcommand\footnoterule{\vspace*{-0.018cm}\noindent\textcolor{black}{\rule{0.25\columnwidth}{0.018cm}}\vspace*{0.101cm}}
+}
+\makeatother
+\pagestyle{Standard}
+\begin{document}
+{\bfseries
+Introduction to Artificial Neural Network Editor (ANNE)}
+
+
+\bigskip
+
+{
+The initial description for the project was as follows:
+
+{\textit{
+The aim of this project is to build a flexible tool for building large
+scale neural network models of aspects of brain functioning. The tool
+will allow the user to specify what the function of an individual
+neuron is, what the overall connectivity of the neurons is, and will
+then build the corresponding network and allow simulations to be run on
+it.}}
+
+There are three obvious key requirements from the initial description
+which are:
+
+\begin{itemize}
+\item 
+{
+Flexibility {--} The tool must be able to work with a number of
+different neural network paradigms, in response to this we designed our
+solution to be highly modular and pluggable with further extensions
+which would require no changes to be made to the core framework.
+}
+\item 
+{
+High Detail Modelling {--} Users should be able to manipulate individual
+neurons and their connectivity which is simple enough, however with the
+scale of networks desired performance issues arrive. The framework was
+designed to handle large networks from the outset enabling the best
+possible performance.
+}
+\item 
+{
+Build and Simulate networks {--} The ability to run and train networks,
+as well as export them to an intermediate language, which NeuroML was
+chosen to be the modelling standard implemented. Spike Time Dependent
+Plasticity (STDP) was implemented for network training as well as a
+number of network execution features and data output features.
+}
+\end{itemize}
+
+Neural Networks are involved in a number of areas of
+research, especially within Artificial Intelligence in Computer
+Science. Neural Networks have the ability to learn relatively complex
+functions that can range from simple logical operators, such as
+{\textit{AND, OR}} and
+{\textit{XOR}} to facial and emotion
+recognition from photographs or facial markers.
+
+Neural networks are made up of two main features, Neurones, which are
+nodes in a graph and Synapses which are the edges. Nodes take an input
+from other nodes across synapses which may themselves have properties
+such as weight or delay, neurones then perform a function on the
+inputs, perhaps with their own bias before sending that information
+through the \ graph. Neural networks can operate over iterations where
+information is sent from the start to the end, or in a timed fashion
+where information is sent through but takes time to travel through the
+network. Artificial neural networks generally work with a more
+arbitrary value being passed through the network were Biologically
+inspired neural networks work with voltages and thresholds more
+commonly. Biologically inspired networks, as you might expect try to
+model neural networks as closely as possible to those found within
+biological systems.
+
+One area where our solution is hopefully going to
+receive some use is with the iCub robot that the Department of
+Computing, Imperial College London has recently taken possession of.
+The iCub is a sophisticated robot which is designed to have the
+proportions and movement of a 3.5 year old child, the main goal of the
+iCub project, which is run by the RobotCub Consortium
+is to study cognition through the implementation of biologically
+motivated algorithms.
+
+This is why there is an emphasis within the ANNE towards biological
+networks which include neurones such as Excitatory and Inhibitory
+Spiking Neurones. ANNE also supports more artificially inspired
+networks as well, but because of the pluggable nature of ANNE, adding
+support for new Neurones or Synapses is possible, hopefully extending
+the useful life time of the application without the need for waiting
+for new release cycles to complete and allow other developers to extend
+and focus the tool to their own requirements.
+
+Overall, ANNE provides a simple and intuitive user interface which gives
+the user a high degree of control of designing, training and executing
+large scale networks. It gives developers a solid framework which is
+highly pluggable making application extensions trivial to integrate and
+distribute, giving ANNE a longer lifetime and the ability with
+extensions to model new network paradigms.
+}
+\end{document}

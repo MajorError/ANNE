@@ -1,0 +1,541 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>StatSVN - /neuralnets/trunk/src Developers: ig106</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="Generator" content="StatSVN 0.4.1"/>
+    <link rel="stylesheet" href="statcvs.css" type="text/css"/>
+  </head>
+
+<body>
+
+<h1>/neuralnets/trunk/src Developers: ig106</h1>
+<div id="parentlink">&#171; <a href="index.html">Development Statistics for  /neuralnets/trunk/src</a> &#171; <a href="developers.html">Developers</a></div>
+<dl class="attributes">
+    <dt>Login name:</dt>
+    <dd>ig106</dd>
+    <dt>Total Commits:</dt>
+    <dd>96 (3.9%)</dd>
+    <dt>Lines of Code:</dt>
+    <dd>2164 (3.9%)</dd>
+    <dt>Most Recent Commit:</dt>
+    <dd><span class="date">2009-01-08 18:10</span></dd>
+</dl>
+
+<div class="section">
+<h2>Activity by Clock Time</h2>
+<p class="chart"><img src="activity_time_ig106.png" alt="Activity by Hour of Day for ig106" width="512" height="320" /></p><p class="chart"><img src="activity_day_ig106.png" alt="Activity by Day of Week for ig106" width="512" height="320" /></p></div>
+<div class="section">
+<h2>Activity in Directories</h2>
+  <table  rules="groups" summary="Overview of this author's activities in different directories">
+    <colgroup align="left"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <colgroup align="right"/>
+    <thead>
+      <tr>
+        <th>Directory</th>
+        <th>Changes</th>
+        <th>Lines of Code</th>
+        <th>Lines per Change</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Totals</th>
+        <td>96 (100.0%)</td>
+        <td>2164 (100.0%)</td>
+        <td>22.5</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr  class="odd">
+        <th><a href="dir_uk_ac_ic_doc_neuralnets_gui.html" class="directory">uk/ac/ic/doc/neuralnets/gui/</a></th>
+        <td>48 (50.0%)</td>
+        <td>657 (30.4%)</td>
+        <td>13.6</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_uk_ac_ic_doc_neuralnets_gui_modifier.html" class="directory">uk/ac/ic/doc/neuralnets/gui/modifier/</a></th>
+        <td>13 (13.5%)</td>
+        <td>656 (30.3%)</td>
+        <td>50.4</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_uk_ac_ic_doc_neuralnets_gui_graph.html" class="directory">uk/ac/ic/doc/neuralnets/gui/graph/</a></th>
+        <td>19 (19.8%)</td>
+        <td>618 (28.6%)</td>
+        <td>32.5</td>
+      </tr>
+      <tr  class="even">
+        <th><a href="dir_uk_ac_ic_doc_neuralnets_gui_commands.html" class="directory">uk/ac/ic/doc/neuralnets/gui/commands/</a></th>
+        <td>13 (13.5%)</td>
+        <td>187 (8.6%)</td>
+        <td>14.3</td>
+      </tr>
+      <tr  class="odd">
+        <th><a href="dir_uk_ac_ic_doc_neuralnets_gui_graph_listener.html" class="directory">uk/ac/ic/doc/neuralnets/gui/graph/listener/</a></th>
+        <td>3 (3.1%)</td>
+        <td>46 (2.1%)</td>
+        <td>15.3</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p class="chart"><img src="directory_sizes_ig106.png" alt="Activity of ig106" width="720" height="450" /></p></div>
+<div class="section">
+<h2>Most Recent Commits</h2>
+<dl class="commitlist">
+  <dt><a name="20"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-08 18:10</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">402</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Refactoring UndoNodes.java to RemoveNodes.java 
+    </p>
+    <p class="commitdetails"><strong>230</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        DeleteItemsCommand.java&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(+3&#160;-3)</span>,
+        LayeredNetworkModifier.java&#160;<span class="change">(+3&#160;-3)</span>,
+        RemoveNodes.java&#160;<span class="new">(new&#160;221)</span>,
+        UndoNodes.java&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="19"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-08 17:55</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">400</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Fixed major redo bug.
+    </p>
+    <p class="commitdetails"><strong>85</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        DeleteItemsCommand.java&#160;<span class="change">(+4&#160;-50)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        UndoNodes.java&#160;<span class="change">(+81&#160;-17)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="18"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-07 17:58</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">380</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added Comments
+    </p>
+    <p class="commitdetails"><strong>232</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(+232&#160;-196)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="17"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-07 16:57</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">373</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Deleted View.java
+    </p>
+    <p class="commitdetails"><strong>0</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        View.java&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="16"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-07 16:56</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">372</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added Comments. Removed DummyCommand.java
+    </p>
+    <p class="commitdetails"><strong>6</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        Command.java&#160;<span class="change">(+6&#160;-1)</span>,
+        DummyCommand.java&#160;<span class="del">(del)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="15"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-07 16:55</span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added Comments
+    </p>
+    <p class="commitdetails"><strong>259</strong> lines of code changed in <span class="files">8 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIAnchor.java&#160;<span class="change">(+64&#160;-45)</span>,
+        GUIBridge.java&#160;<span class="change">(+27&#160;-5)</span>,
+        GUIEdge.java&#160;<span class="change">(+81&#160;-69)</span>,
+        GUINetwork.java&#160;<span class="change">(+57&#160;-36)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph/listener</strong>:
+        ZoomListener.java&#160;<span class="change">(+11&#160;-8)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(-1)</span>,
+        UndoNodes.java&#160;<span class="change">(+14&#160;-8)</span>,
+        ZoomToolbar.java&#160;<span class="change">(+5)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="14"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-07 15:18</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">368</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added Comments
+    </p>
+    <p class="commitdetails"><strong>14</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        UndoNodes.java&#160;<span class="change">(+14)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="13"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-05 17:14</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">324</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Undoing and redoing adding works now. 
+    </p>
+    <p class="commitdetails"><strong>71</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(+71&#160;-10)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="12"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-05 17:13</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">323</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>26</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+23&#160;-22)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph/listener</strong>:
+        ZoomListener.java&#160;<span class="change">(+3&#160;-8)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="11"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-05 12:18</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">312</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUILayout.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="10"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-05 11:45</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">311</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+ZooZoomListener.java added. Added to sampleplugins on trac.<br />
+Zoom buttons now enabled when GUINetwork is selected and disabled when unselected.<br />
+
+    </p>
+    <p class="commitdetails"><strong>43</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIToolbar.java&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        Command.java&#160;<span class="change">(+3)</span>,
+        CommandControl.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+4&#160;-1)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph/listener</strong>:
+        ZoomListener.java&#160;<span class="new">(new&#160;32)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="9"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2009-01-04 13:36</span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>37</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIToolbar.java&#160;<span class="change">(+11&#160;-6)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+26)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="8"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-12-02 14:44</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">237</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Created CommandEvent and made GUIToolbar implement Statistician so that undo/redo events can run in parallel and enable/disable toolbar buttons accordingly - Chris and ismail
+    </p>
+    <p class="commitdetails"><strong>127</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIToolbar.java&#160;<span class="change">(+107&#160;-57)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        CommandControl.java&#160;<span class="change">(+8&#160;-1)</span>,
+        CommandEvent.java&#160;<span class="new">(new&#160;11)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="7"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-12-01 16:14</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">224</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Edited undo and redo stuff, began to add the ability to remove GUINetworks - Ismail and Chris
+    </p>
+    <p class="commitdetails"><strong>192</strong> lines of code changed in <span class="files">6 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIToolbar.java&#160;<span class="change">(+17&#160;-4)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        Command.java&#160;<span class="change">(+1&#160;-1)</span>,
+        CommandControl.java&#160;<span class="change">(+13&#160;-5)</span>,
+        DummyCommand.java&#160;<span class="new">(new&#160;25)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+133&#160;-139)</span>,
+        GUINetwork.java&#160;<span class="change">(+3&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="6"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-12-01 15:00</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">220</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Added commands package, and added undo and redo buttons to the toolbar - Chris and Ismail
+    </p>
+    <p class="commitdetails"><strong>148</strong> lines of code changed in <span class="files">5 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIToolbar.java&#160;<span class="change">(+13&#160;-2)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/commands</strong>:
+        Command.java&#160;<span class="new">(new&#160;27)</span>,
+        CommandControl.java&#160;<span class="new">(new&#160;85)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+12&#160;-2)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/modifier</strong>:
+        AddNodesConfig.java&#160;<span class="change">(+11&#160;-4)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="5"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-11-24 17:55</span>
+  </dt>
+  <dd>
+    <p class="comment">
+Got a coolbar in the GUI. Managed to add the zoom in and zoom out buttons with listeners. You can zoom in fine...but after that you cant really click anything on the graph. It'll crash. 
+    </p>
+    <p class="commitdetails"><strong>90</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        GUIMain.java&#160;<span class="change">(+9&#160;-13)</span>,
+        GUIToolbar.java&#160;<span class="new">(new&#160;81)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="4"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-11-18 14:05</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">115</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>171</strong> lines of code changed in <span class="files">4 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui</strong>:
+        ChrismailMock.java&#160;<span class="new">(new&#160;136)</span>,
+        View.java&#160;<span class="change">(+23&#160;-4)</span>
+      </li>
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIManager.java&#160;<span class="change">(+1&#160;-1)</span>,
+        GUINetwork.java&#160;<span class="change">(+11&#160;-3)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="3"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-11-16 18:42</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">108</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+Updating the GUIBridge with style.
+    </p>
+    <p class="commitdetails"><strong>1</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIBridge.java&#160;<span class="change">(+1&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="2"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-11-16 17:16</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">105</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>30</strong> lines of code changed in <span class="files">1 file</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIBridge.java&#160;<span class="change">(+30&#160;-1)</span>
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a name="1"></a>
+    <a href="user_ig106.html" class="author">ig106</a>
+    <span class="date">2008-11-16 15:25</span>
+    <span class="revisionNumberOuter">Rev.: <span class="revisionNumberInner">102</span></span>
+  </dt>
+  <dd>
+    <p class="comment">
+
+    </p>
+    <p class="commitdetails"><strong>10</strong> lines of code changed in <span class="files">2 files</span>:</p>
+    <ul class="commitdetails">
+      <li>
+        <strong>uk/ac/ic/doc/neuralnets/gui/graph</strong>:
+        GUIBridge.java&#160;<span class="new">(new&#160;5)</span>,
+        GUINetwork.java&#160;<span class="new">(new&#160;5)</span>
+      </li>
+    </ul>
+  </dd>
+
+</dl>
+
+<p>(11 more)</p>
+</div><div id="generatedby">Generated by <a href="http://www.statsvn.org">StatSVN</a> 0.4.1</div>
+</body>
+</html>
